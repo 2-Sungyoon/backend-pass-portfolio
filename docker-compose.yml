@@ -10,7 +10,7 @@ services:
       MYSQL_PASSWORD: portfolio1234
       MYSQL_ROOT_PASSWORD: portfolio1234
     ports:
-      - "3306:3306"
+      - "3307:3306"
     volumes:
       - mysql_data:/var/lib/mysql
     networks:
@@ -27,7 +27,7 @@ services:
           cpus: "2"  # 최대 2개의 코어 할당
           memory: 2GB   # 최대 2GB 메모리 할당
 
-  app:
+  app:    # 우리의 프로그램은 도커헙에 밀키트화x->우리의 도커파일 기반으로 도커 이미지를 생성->컨테이너로 동작 [도커라이징] 즉 이미지를 만드는 작업
     build: .
     container_name: spring-app
     ports:
@@ -51,6 +51,7 @@ services:
     networks:
       - monitoring
 
+  #데이터를 수집하는 컨테이너
   prometheus:
     image: prom/prometheus
     container_name: prometheus
@@ -66,8 +67,9 @@ services:
           cpus: '0.5'
           memory: 512M
 
+  # 수집한 데이터를 시각화
   grafana:
-    image: grafana/grafana
+    image: grafana/grafana  # dockerhub 내의 다운로드 파일
     container_name: grafana
     ports:
       - "3001:3000"
