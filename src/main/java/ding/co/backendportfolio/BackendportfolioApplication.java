@@ -12,7 +12,7 @@ public class BackendportfolioApplication {
     public static void main(String[] args) {
 
         // 커밋용추가
-        System.out.println("다듣자");
+        System.out.println("다듣자.");
         SpringApplication.run(BackendportfolioApplication.class, args);
     }
 
